@@ -6,8 +6,8 @@ const NormalText = styled.p`{
     font-size: 14px;
 }`
 
-const BrushText = styled.div`{
-    font-family: 'Permanent Marker', cursive;
+const TitleText = styled.div`{
+    font-family: 'Helvetica', sans-serif;
     font-size: 60px;
     text-align: center;
     
@@ -28,4 +28,4 @@ const Title = styled.div`{
 }`
 
 
-export { NormalText, BrushText, Title };
+export { NormalText, TitleText, Title };

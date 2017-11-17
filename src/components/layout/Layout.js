@@ -6,35 +6,32 @@ import Nav from './../nav/Nav';
 import Footer from './../footer/Footer';
 
 //import crumbs (independently styled elements)
-import { Container } from './Container';
-import { NormalText, BrushText, Title } from './../../crumbs/formatting/Text';
+import { Container, SplashContainer } from './Container';
+import { NormalText, TitleText, Title } from './../../crumbs/formatting/Text';
 import { Button, ButtonContainer } from "./../../crumbs/interactive/Button";
 
 import logo from './../../logo.svg';
 
 class Layout extends Component {
+  componentWillMount () {
+    const script = document.createElement("script");
+
+    script.src = "./../../../public/helpers.js";
+    // script.async = true;s
+
+    document.body.appendChild(script);
+  }
+
   render() {
     return (
       <Container>
         <Nav />
-          <BrushText>BROAD STROKES</BrushText>
-          <Title>REACT-BASED UI KIT</Title>
 
-          <ButtonContainer>
+        <SplashContainer>
+          <div className="wrapper"></div>
+        </SplashContainer>
 
-            <Button flip href="https://github.com/PaperNathan/broad-strokes/blob/master/README.md">
-                <NormalText>DOCS</NormalText>
-            </Button>
-
-            <Button flip href="https://github.com/PaperNathan/broad-strokes">
-                <NormalText>GITHUB</NormalText>
-            </Button>
-
-            <Button shiftcolor href="#">
-                <NormalText>STYLED TEST</NormalText>
-            </Button>
-
-          </ButtonContainer>
+        <TitleText>nathan wade</TitleText>
 
         <Footer />
       </Container>

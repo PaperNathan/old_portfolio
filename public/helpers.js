@@ -1,38 +1,36 @@
 // Modify the DOM directly with Javascript or JQuery
 
-// Test Code
+const wrapperEl = document.querySelector('.wrapper');
+const numberOfEls = 26;
+const duration = 5000;
+const delay = duration / numberOfEls;
 
-$('document').ready(function() {
-    var colors = '';
-
-    $('.rainbow').mouseover(function() {
-        that = this;
-
-        colors = setInterval(function() {
-            // Color Picker
-            let r = Math.round(Math.random() * 255);
-            let g = Math.round(Math.random() * 255);
-            let b = Math.round(Math.random() * 255);
-
-            // Saturation Boost
-            let maximum = Math.max(r, g, b);
-
-            if (r == maximum) {
-                r = 255;
-            } else if (g == maximum) {
-                g = 255;
-            } else {
-                b = 255;
-            }
-    
-            // Display Color and Smooth Transition Between Colors
-            let rgb = `rgb(${r}, ${g}, ${b})`;
-            $(that).css("background", rgb);
-        }, 800);
-    });
-
-    $('.rainbow').mouseout(function() {
-        clearInterval(colors);
-    });
-
+let tl = anime.timeline({
+duration: delay,
+complete: function() { tl.restart(); }
 });
+
+function createEl(i) {
+let el = document.createElement('div');
+el.classList.add('el');
+el.style.border = "1px solid #333";
+el.style.borderRadius = '100%';
+el.style.height = `calc(1px + ${i * 20}px`;
+el.style.width = `calc(1px + ${i * 20}px`;
+
+tl.add({
+    begin: function() {
+    anime({
+        targets: el,
+        // scale: [1, 1.25],
+        borderWidth: [1, 5],
+        easing: 'easeInOutSine',
+        direction: 'alternate',
+        duration: duration * .1
+    });
+    }
+});
+wrapperEl.appendChild(el);
+};
+
+for (let i = 0; i < numberOfEls; i++) createEl(i);
